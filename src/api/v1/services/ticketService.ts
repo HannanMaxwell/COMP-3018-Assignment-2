@@ -45,3 +45,10 @@ export const calculateUrgency = (ticket: Ticket): Ticket => {
 
     return { ...structuredClone(ticket), ticketAge: daysOld, urgencyScore, urgencyLevel };
 };
+
+export const getAllTickets = (): Ticket[] => structuredClone(tickets);
+
+export const getTicketById = (id: number): Ticket | undefined => {
+    const ticket = tickets.find(t => t.id === id);
+    return ticket ? structuredClone(ticket) : undefined;
+};
