@@ -70,3 +70,10 @@ export const updateTicket = (id: number, data: Partial<Ticket>): Ticket | null =
     tickets[index] = { ...tickets[index], ...data };
     return structuredClone(tickets[index]);
 };
+
+export const deleteTicket = (id: number): boolean => {
+    const index = tickets.findIndex(t => t.id === id);
+    if (index === -1) return false;
+    tickets.splice(index, 1);
+    return true;
+};
