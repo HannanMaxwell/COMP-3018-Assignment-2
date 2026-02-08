@@ -23,3 +23,25 @@ let tickets: Ticket[] = [
     { id: 6, title: "Login blank", description: "Critical error", priority: "critical", status: "open", createdAt: daysAgo(6) },
     { id: 7, title: "Dark mode", description: "Won't persist", priority: "medium", status: "resolved", createdAt: daysAgo(10) }
 ];
+
+
+export const calculateUrgency = (ticket: Ticket): Ticket => {
+    const createdDate = new Date(ticket.createdAt);
+    const daysOld = Math.floor((Date.now() - createdDate.getTime()) / (1000 * 60 * 60 * 24));
+    
+    let urgencyScore = PRIORITY_SCORES[ticket.priority] + (daysOld * AGE_MULTIPLIER);
+    let urgencyLevel = "";
+
+    if (ticket.status === "resolved") {
+        urgencyScore = 0;
+        urgencyLevel = "Minimal. Ticket resolved.";
+    } else {
+
+        if (urgencyScore >= 80) urgencyLevel = "Critical. Immediate attention required.";
+        else if (urgencyScore >= 50) urgencyLevel = "High urgency. Prioritize resolution."; 
+        else if (urgencyScore >= 30) urgencyLevel = "Moderate. Schedule for attention.";
+        else urgencyLevel = "Low urgency. Address when capacity allows.";
+    }
+
+    return { ...structuredClone(ticket), ticketAge: daysOld, urgencyScore, urgencyLevel };
+};
