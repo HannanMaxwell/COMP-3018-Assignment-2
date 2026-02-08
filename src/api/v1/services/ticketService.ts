@@ -15,7 +15,7 @@ const AGE_MULTIPLIER = 5;
 
 const daysAgo = (days: number) => new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
 
-let tickets: Ticket[] = [
+const tickets: Ticket[] = [
     { id: 1, title: "Update footer", description: "Still 2024", priority: "low", status: "open", createdAt: daysAgo(3) },
     { id: 2, title: "Profile picture slow", description: "30s delay", priority: "medium", status: "open", createdAt: daysAgo(2) },
     { id: 3, title: "Dashboard lag", description: "10s lag", priority: "medium", status: "open", createdAt: daysAgo(6) },

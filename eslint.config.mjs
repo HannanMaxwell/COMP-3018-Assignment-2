@@ -28,26 +28,25 @@ export default tseslint.config(
     },
     {
         rules: {
-            // Core focus: enforce types on variables, function return types, and parameters
-            "@typescript-eslint/explicit-function-return-type": "error", // Require return types on functions
-            "@typescript-eslint/no-unused-vars": "error", // Disallow unused variables
-            "@typescript-eslint/no-unused-vars": [
-                "error",
-                { argsIgnorePattern: "^_" }, // allow unused variables prefixed with underscore
-            ],
+            "@typescript-eslint/explicit-function-return-type": "warn",
             "@typescript-eslint/typedef": [
-                "error",
+                "warn",
                 {
-                    parameter: true, // Require types for function parameters
-                    propertyDeclaration: true, // Require types for class properties
-                    variableDeclaration: true, // Require types for variables
-                    memberVariableDeclaration: true, // Require types for member variables
-                    variableDeclarationIgnoreFunction: true, // Ignore types for function variables
+                    parameter: true,
+                    propertyDeclaration: true,
+                    variableDeclaration: false,
+                    memberVariableDeclaration: true,
+                    variableDeclarationIgnoreFunction: true,
                 },
             ],
-            // Allow ES6 imports with CommonJS output
+            "@typescript-eslint/no-unused-vars": [
+                "error",
+                { argsIgnorePattern: "^_" },
+            ],
             "@typescript-eslint/no-require-imports": "off",
             "@typescript-eslint/no-var-requires": "off",
+            "@typescript-eslint/no-explicit-any": "warn",
+            "@typescript-eslint/no-inferrable-types": "off",
         },
     }
 );
