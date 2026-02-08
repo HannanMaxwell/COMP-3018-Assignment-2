@@ -15,3 +15,13 @@ export const getTicketUrgency = (req: Request, res: Response) => {
     const calculated = ticketService.calculateUrgency(ticket);
     res.status(HTTP_STATUS.OK).json({ message: "Ticket urgency calculated", data: calculated });
 };
+
+export const createTicket = (req: Request, res: Response) => {
+    const { title, description, priority } = req.body;
+    
+    if (!title || !description || !priority) {
+        return res.status(HTTP_STATUS.BAD_REQUEST).json({ message: "Missing required fields" });
+    }
+    const newTicket = ticketService.createTicket({ title, description, priority });
+    res.status(HTTP_STATUS.CREATED).json({ message: "Ticket created", data: newTicket });
+};
