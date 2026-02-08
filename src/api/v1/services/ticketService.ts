@@ -63,3 +63,10 @@ export const createTicket = (data: Pick<Ticket, "title" | "description" | "prior
     tickets.push(newTicket);
     return structuredClone(newTicket);
 };
+
+export const updateTicket = (id: number, data: Partial<Ticket>): Ticket | null => {
+    const index = tickets.findIndex(t => t.id === id);
+    if (index === -1) return null;
+    tickets[index] = { ...tickets[index], ...data };
+    return structuredClone(tickets[index]);
+};
