@@ -52,3 +52,14 @@ export const getTicketById = (id: number): Ticket | undefined => {
     const ticket = tickets.find(t => t.id === id);
     return ticket ? structuredClone(ticket) : undefined;
 };
+
+export const createTicket = (data: Pick<Ticket, "title" | "description" | "priority">): Ticket => {
+    const newTicket: Ticket = {
+        id: tickets.length > 0 ? Math.max(...tickets.map(t => t.id)) + 1 : 1,
+        ...data,
+        status: "open",
+        createdAt: new Date().toISOString()
+    };
+    tickets.push(newTicket);
+    return structuredClone(newTicket);
+};
