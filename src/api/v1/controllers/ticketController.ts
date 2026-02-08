@@ -32,3 +32,10 @@ export const updateTicket = (req: Request, res: Response) => {
     if (!updated) return res.status(HTTP_STATUS.NOT_FOUND).json({ message: "Ticket not found" });
     res.status(HTTP_STATUS.OK).json({ message: "Ticket updated", data: updated });
 };
+
+export const deleteTicket = (req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+    const success = ticketService.deleteTicket(id);
+    if (!success) return res.status(HTTP_STATUS.NOT_FOUND).json({ message: "Ticket not found" });
+    res.status(HTTP_STATUS.OK).json({ message: "Ticket deleted" });
+};
